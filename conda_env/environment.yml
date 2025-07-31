@@ -3,14 +3,12 @@ channels:
   - conda-forge
   - bioconda
 dependencies:
-  - biobb_analysis==4.2.0
-  - biobb_io==4.2.0
-  - biobb_structure_utils==4.2.0
-  - biobb_chemistry==4.2.0
-  - biobb_amber==4.2.0
+  - biobb_analysis==5.1.0
+  - biobb_io==5.1.0
+  - biobb_structure_utils==5.1.0
+  - biobb_chemistry==5.1.0
+  - biobb_amber==5.1.0
   - jupyter
-  - gfortran==11.3.0
-  - libgfortran5==11.3.0
   - plotly
   - nglview
   - simpletraj

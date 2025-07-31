@@ -3,6 +3,7 @@
 guidelines.md
 .vscode
 *.pdb
+!CGCGAATTCGCG.pdb
 *.sdf
 *.pdbqt
 *.log

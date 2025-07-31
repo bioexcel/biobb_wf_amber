@@ -8,7 +8,6 @@ The **setup process** is performed using the **biobb_amber** module from the **B
 
 The main **steps of the pipeline** are:
 
-- **Model** the **B-DNA** structure
 - Generate structure **topology**
 - **Solvate** structure with a truncated octahedron box, with **SCP/E water model**
 - **Neutralize** the system with Potassium ions
@@ -48,15 +47,14 @@ jupyter-notebook biobb_wf_amber/notebooks/abc_setup/biobb_wf_amber_abc_setup.ipy
 ***
 ## Pipeline steps
  1. [Initial Parameters](#input)
- 2. [Model DNA 3D Structure](#model)
- 3. [Generate Topology](#top)
- 4. [Add Water Box](#water)
- 5. [Adding additional ionic concentration](#ions)
- 6. [Randomize Ions](#random)
- 7. [Generate Topology with Hydrogen Mass Partitioning (4fs)](#top4fs)
- 8. [System Equilibration](#eq)
- 9. [Free MD Simulation](#free)
- 10. [Output files](#output)
+ 2. [Generate Topology](#top)
+ 3. [Add Water Box](#water)
+ 4. [Adding additional ionic concentration](#ions)
+ 5. [Randomize Ions](#random)
+ 6. [Generate Topology with Hydrogen Mass Partitioning (4fs)](#top4fs)
+ 7. [System Equilibration](#eq)
+ 8. [Free MD Simulation](#free)
+ 9. [Output files](#output)
  
 ***
 <table><tr style="background: white;">
@@ -136,49 +134,10 @@ import plotly.graph_objs as go
 
 
 ```python
-seq = "CGCGAATTCGCG" # Drew-Dickerson dodecamer
-
+dna_pdb = "CGCGAATTCGCG.pdb" # Drew-Dickerson dodecamer
 forcefield = ["DNA.bsc1"] # ParmBSC1 (ff99 + bsc0 + bsc1) for DNA. Ivani et al. Nature Methods 13: 55, 2016
 water_model = "OPCBOX" # SPC/E + Joung-Chetham monovalent ions + Li/Merz highly charged ions (+2 to +4, 12-6 normal usage set)
 ions_model = "ionsjc_tip4pew" # Monovalent ion parameters for Ewald and TIP4P/EW water from Joung & Cheatham JPCB (2008)
-```
-
-<a id="model"></a>
-## Model DNA 3D structure
-
-Model **DNA 3D structure** from a **nucleotide sequence** using the **nab tool** from the **AMBER MD package**.
-***
-**Building Blocks** used:
- - [nab_build_dna_structure](https://biobb-amber.readthedocs.io/en/latest/nab.html#module-nab.nab_build_dna_structure) from **biobb_amber.nab.nab_build_dna_structure**
-***
-
-
-```python
-# uncomment in case of experiencing issues with undefined AMBERHOME variable in the cell below:
-# import os
-# os.environ['AMBERHOME'] = "/path/to/anaconda3/envs/biobb_wf_amber" # when running in Jupyter Notebook / Lab
-# os.environ['AMBERHOME'] = "/usr/local" # when running in Google Colab
-```
-
-
-```python
-# Import module
-from biobb_amber.nab.nab_build_dna_structure import nab_build_dna_structure
-
-# Create properties dict and inputs/outputs
-dna_pdb = seq+'.pdb'
-prop = {
-    'sequence': seq,
-    'helix_type': 'abdna', # Right Handed B-DNA, Arnott 
-    'remove_tmp': True,
-    'compiler': 'gcc', # change according to your operating system
-    'linker': 'x86_64-conda_cos6-linux-gnu-gfortran' # gfortran linux version
-    #'linker': 'gfortran' # gfortran osx version
-}
-
-#Create and launch bb
-nab_build_dna_structure(output_pdb_path=dna_pdb,
-    properties=prop)
 ```
 
 ### Visualizing 3D structure

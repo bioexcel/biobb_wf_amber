@@ -9,5 +9,8 @@ dependencies:
   - biobb_chemistry==5.1.0
   - biobb_amber==5.1.0
   - plotly
+  - jupyterlab=3.6
+  - nodejs=16
+  - ipywidgets=7
   - nglview
   - simpletraj

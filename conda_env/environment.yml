@@ -10,5 +10,5 @@ dependencies:
   - biobb_amber==5.2.0
   - jupyter
   - plotly
-  - nglview
+  - nglview<=4.0
   - simpletraj
